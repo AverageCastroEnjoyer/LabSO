@@ -8,7 +8,7 @@ as_oper() {
   runuser -u oper -- sh -c "cd '$APP_DIR' && $1"
 }
 
-as_nodehello "git fetch origin '$BRANCH'"
+as_oper "git fetch origin '$BRANCH'"
 
 LOCAL_REV="$(as_oper "git rev-parse HEAD")"
 REMOTE_REV="$(as_oper "git rev-parse 'origin/$BRANCH'")"
