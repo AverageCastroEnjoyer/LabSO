@@ -19,8 +19,8 @@ if [ "$LOCAL_REV" = "$REMOTE_REV" ]; then
 fi
 
 echo "Actualizando $APP_DIR desde origin/$BRANCH..."
-as_nodehello "git checkout '$BRANCH'"
-as_nodehello "git pull --ff-only origin '$BRANCH'"
-as_nodehello "npm ci --omit=dev"
+as_oper "git checkout '$BRANCH'"
+as_oper "git pull --ff-only origin '$BRANCH'"
+as_oper "npm ci --omit=dev"
 systemctl restart hello-node.service
 echo "hello-node actualizado y reiniciado."
