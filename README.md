@@ -24,3 +24,27 @@ as_oper "git pull --ff-only origin '$BRANCH'"
 as_oper "npm ci --omit=dev"
 systemctl restart hello-node.service
 echo "hello-node actualizado y reiniciado."
+
+##deploy.service
+[Unit]
+Description=Actualizar Hello World Node desde rama deploy
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/node-hello-deploy.sh
+
+##deploy.timer
+[Unit]
+Description=Revisar cambios de la rama deploy para Node Hello World
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+AccuracySec=15s
+Persistent=true
+Unit=node-hello-deploy.service
+
+[Install]
+WantedBy=timers.target
